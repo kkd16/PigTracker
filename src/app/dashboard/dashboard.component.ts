@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 
 import { icon, Marker } from 'leaflet';
+import { PigReport } from '../pig-report';
+import { PigService } from '../pig.service';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -26,8 +28,9 @@ Marker.prototype.options.icon = iconDefault;
 export class DashboardComponent implements OnInit, AfterViewInit{
   
   private map: L.Map | L.LayerGroup<any> | undefined;
+  reports: PigReport[] = [];
   
-  constructor() {}
+  constructor(private pigService: PigService) {}
 
   ngAfterViewInit(): void {
     this.map = L.map('mapid').setView([49.2, -123], 11);
@@ -44,5 +47,12 @@ export class DashboardComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
+    this.getReports();
+
+  }
+
+  getReports():void {
+    this.pigService.getReports().subscribe(reports => this.reports = reports);
+    console.log(this.reports);
   }
 }

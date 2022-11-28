@@ -1,0 +1,8 @@
+<div *ngIf="report">
+    <h2>{{report.data.name}} Details</h2>
+    <div><span>key: </span>{{report.key}}</div>
+    <div>
+      <p>{{report.data.name}}</p>
+    </div>
+    <button type="button" (click)="goBack()">Go Back</button>
+  </div>

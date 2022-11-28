@@ -1,1 +1,9 @@
 <div id="mapid" style="width:100%;height:400px"></div>
+
+<ul class="reports">
+    <li *ngFor="let report of reports">
+      <a routerLink="/detail/{{report.key}}">{{report.data.name}}</a>
+    </li>
+</ul>
+
+<a routerLink="/create">Create</a>

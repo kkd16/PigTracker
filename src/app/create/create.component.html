@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <fieldset>
+        <h1>Create New Report</h1>
+        <input name="name" type="text" placeholder="Name" formControlName="name"> <br>
+        <input name="breed" type="text" placeholder="Breed" formControlName="breed"> <br>
+        <input name="pid" type="number" placeholder="Pig ID" formControlName="pid"> <br>
+        <input name="notes" type="text" placeholder="Extra Notes" formControlName="notes"> <br>
+        <button [disabled]="!form.valid">Create</button>
+    </fieldset>
+</form>
+
