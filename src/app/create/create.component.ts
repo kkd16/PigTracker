@@ -8,7 +8,7 @@ import * as uuid from 'uuid';
 import { PigLocation } from '../pig-location';
 import { LocationService } from '../location.service';
 import { AddLocationComponent } from '../add-location/add-location.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 
 @Component({
@@ -88,10 +88,18 @@ export class CreateComponent implements OnInit {
   }
 
   newLocation(): void {
-    let dialogRef = this.dialog.open(AddLocationComponent, {
-      height: '400px',
-      width: '600px'
-    });
-    dialogRef.updatePosition({ top: '25px', left: '25px', right:'25px', bottom:'25px' });
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '300px';
+    dialogConfig.width = '700px';
+    dialogConfig.position = {
+      'top': '100px',
+      left: '150px'
+    }
+    dialogConfig.data = this.locations;
+
+    let dialogRef = this.dialog.open(AddLocationComponent, dialogConfig);
   }
 }
