@@ -4,12 +4,14 @@ import { CreateComponent } from './create/create.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
+import { DeleteComponent } from './delete/delete.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'create', component: CreateComponent },
-  { path: 'detail/:key', component: DetailsComponent}
+  { path: 'detail/:key', component: DetailsComponent},
+  { path: 'delete/:key', component: DeleteComponent}
 ];
 
 @NgModule({

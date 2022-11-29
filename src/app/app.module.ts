@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
+import { DeleteComponent } from './delete/delete.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     CreateComponent,
-    DetailsComponent
+    DetailsComponent,
+    DeleteComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

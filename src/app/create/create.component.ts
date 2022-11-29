@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { PigReport } from '../pig-report';
 import { PigService } from '../pig.service';
@@ -13,7 +14,7 @@ import * as uuid from 'uuid';
 export class CreateComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private pigService: PigService, private router: Router) {
+  constructor(private pigService: PigService, private router: Router, private location: Location) {
     let formControls = {
       name: new FormControl('', [
         Validators.required,
@@ -24,6 +25,10 @@ export class CreateComponent implements OnInit {
         Validators.minLength(3)
       ]),
       pid: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]),
+      reporter: new FormControl('', [
         Validators.required,
         Validators.minLength(3)
       ]),
@@ -45,10 +50,16 @@ export class CreateComponent implements OnInit {
         "notes": values.notes,
         "picked_up": false,
         "date": new Date(),
+        "reporter": values.reporter,
         "location_id": 0
       }
     };
 
     this.pigService.addReport(newReport);
+    this.router.navigate(["/dashboard"]);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

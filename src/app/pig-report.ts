@@ -7,6 +7,7 @@ export interface PigReport {
         notes: string;
         picked_up: boolean;
         date: Date;
+        reporter: string;
         location_id: number;
     }
     

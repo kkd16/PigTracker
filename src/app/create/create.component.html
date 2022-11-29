@@ -1,11 +1,13 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <fieldset>
         <h1>Create New Report</h1>
-        <input name="name" type="text" placeholder="Name" formControlName="name"> <br>
-        <input name="breed" type="text" placeholder="Breed" formControlName="breed"> <br>
-        <input name="pid" type="number" placeholder="Pig ID" formControlName="pid"> <br>
-        <input name="notes" type="text" placeholder="Extra Notes" formControlName="notes"> <br>
-        <button [disabled]="!form.valid">Create</button>
+        <input class="form-control" name="name" type="text" placeholder="Name" formControlName="name"> <br>
+        <input class="form-control" name="breed" type="text" placeholder="Breed" formControlName="breed"> <br>
+        <input class="form-control" name="pid" type="number" placeholder="Pig ID" formControlName="pid"> <br>
+        <input class="form-control" name="reporter" type="text" placeholder="Your Name" formControlName="reporter"> <br>
+        <input class="form-control" name="notes" type="text" placeholder="Extra Notes" formControlName="notes"> <br>
+        <button class="btn btn-primary" [disabled]="!form.valid">Create</button>
+        <button class="btn btn-danger" type="button" (click)="goBack()">Cancel</button>
     </fieldset>
 </form>
 

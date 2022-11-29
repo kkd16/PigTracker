@@ -3,19 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { PigReport } from './pig-report';
+import { MessagesService } from './messages.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PigService {
 
-  private reportsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/reports/documents/';
+  private reportsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/test3/documents/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private messageService: MessagesService) { }
 
   getReports(): Observable<PigReport[]> {
     return this.http.get<PigReport[]>(this.reportsUrl)
@@ -27,7 +28,7 @@ export class PigService {
 
   addReport(report: PigReport){
     this.http.post(this.reportsUrl, report).subscribe((data:any)=>{
-      console.log("Added report: " + data);
+      this.log("Added report: " + report.data.name);
     })
   }
 
@@ -55,7 +56,7 @@ export class PigService {
   }
 
   private log(message: string) {
-    console.log(`PigService: ${message}`);
+    this.messageService.push(`PigService: ${message}`);
   }
 
 }

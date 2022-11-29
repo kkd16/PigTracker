@@ -1,9 +1,27 @@
 <div id="mapid" style="width:100%;height:400px"></div>
 
-<ul class="reports">
-    <li *ngFor="let report of reports">
-      <a routerLink="/detail/{{report.key}}">{{report.data.name}}</a>
-    </li>
-</ul>
+<div class="reports">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Location</th>
+          <th scope="col">Reported By</th>
+          <th scope="col">Time Reported</th>
+          <th scope="col" colspan="3">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="report" *ngFor="let report of reports">
+          <td>{{report.data.location_id}}</td>
+          <td>{{report.data.reporter}}</td>
+          <td>{{report.data.date | date:'medium'}}</td>
+          <td *ngIf="report.data.picked_up === false">READY FOR PICKUP</td><td *ngIf="report.data.picked_up === true">RETRIEVED</td> 
+          <td><a routerLink="/detail/{{report.key}}">MORE INFO</a></td>
+          <td><a routerLink="/delete/{{report.key}}">DELETE</a></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
 
-<a routerLink="/create">Create</a>
+<button routerLink="/create" type="button" class="btn btn-primary" id="create-btn">Create New Report</button>
+<app-messages></app-messages>
