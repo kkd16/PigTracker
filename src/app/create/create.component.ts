@@ -32,6 +32,11 @@ export class CreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.pattern('[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+      ]),
       notes: new FormControl('', [])
     }
 
@@ -51,6 +56,7 @@ export class CreateComponent implements OnInit {
         "picked_up": false,
         "date": new Date(),
         "reporter": values.reporter,
+        "phone": values.phone,
         "location_id": 0
       }
     };

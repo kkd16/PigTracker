@@ -8,6 +8,7 @@ export interface PigReport {
         picked_up: boolean;
         date: Date;
         reporter: string;
+        phone: string;
         location_id: number;
     }
     

@@ -10,6 +10,8 @@ import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
 import { DeleteComponent } from './delete/delete.component';
 import { MessagesComponent } from './messages/messages.component';
+import { PhonePipe } from './phone.pipe';
+import { StatusPipe } from './status.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MessagesComponent } from './messages/messages.component';
     CreateComponent,
     DetailsComponent,
     DeleteComponent,
-    MessagesComponent
+    MessagesComponent,
+    PhonePipe,
+    StatusPipe
   ],
   imports: [
     BrowserModule,

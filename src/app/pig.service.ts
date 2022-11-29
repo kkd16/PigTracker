@@ -10,7 +10,7 @@ import { MessagesService } from './messages.service';
 })
 export class PigService {
 
-  private reportsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/test3/documents/';
+  private reportsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/test4/documents/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

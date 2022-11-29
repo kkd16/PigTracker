@@ -17,7 +17,6 @@
           <td>{{report.data.date | date:'medium'}}</td>
           <td *ngIf="report.data.picked_up === false">READY FOR PICKUP</td><td *ngIf="report.data.picked_up === true">RETRIEVED</td> 
           <td><a routerLink="/detail/{{report.key}}">MORE INFO</a></td>
-          <td><a routerLink="/delete/{{report.key}}">DELETE</a></td>
         </tr>
       </tbody>
     </table>
