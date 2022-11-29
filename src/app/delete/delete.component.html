@@ -1,1 +1,10 @@
-<p>delete works!</p>
+<div *ngIf="report">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <fieldset>
+            <h1>Delete {{report.data.name}}?</h1>
+            <input class="form-control" name="password" type="text" placeholder="Enter Password" formControlName="password"> <br>
+            <button class="btn btn-primary" [disabled]="!form.valid">Delete</button>
+            <button class="btn btn-danger" type="button" (click)="goBack()">Cancel</button>
+        </fieldset>
+    </form>
+</div>

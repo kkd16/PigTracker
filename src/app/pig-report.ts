@@ -9,7 +9,7 @@ export interface PigReport {
         date: Date;
         reporter: string;
         phone: string;
-        location_id: number;
+        location_key: string;
     }
     
 }

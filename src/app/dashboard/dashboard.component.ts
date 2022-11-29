@@ -2,8 +2,11 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 
 import { icon, Marker } from 'leaflet';
+import { LocationService } from '../location.service';
+import { PigLocation } from '../pig-location';
 import { PigReport } from '../pig-report';
 import { PigService } from '../pig.service';
+import { LocationPipe } from '../location.pipe';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -23,14 +26,17 @@ Marker.prototype.options.icon = iconDefault;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  providers: [ LocationPipe ]
 })
 export class DashboardComponent implements OnInit, AfterViewInit{
   
-  private map: L.Map | L.LayerGroup<any> | undefined;
+  // This has to be of type any, otherwise the compiler will freak out.
+  private map: any;
   reports: PigReport[] = [];
+  locations: PigLocation[] = [];
   
-  constructor(private pigService: PigService) {}
+  constructor(private pigService: PigService, private locationService: LocationService, private locationPipe: LocationPipe) {}
 
   ngAfterViewInit(): void {
     this.map = L.map('mapid').setView([49.2, -123], 11);
@@ -44,15 +50,29 @@ export class DashboardComponent implements OnInit, AfterViewInit{
       zoomOffset: -1
     }).addTo(this.map);
 
+    this.getReports();
   }
 
   ngOnInit(): void {
-    this.getReports();
-
+    this.getLocations();
   }
 
   getReports():void {
     this.pigService.getReports().subscribe(reports => this.reports = reports);
-    console.log(this.reports);
+  }
+
+  getLocations():void {
+    this.locationService.getLocations().subscribe(locations => {
+      this.locations = locations;
+      this.populate();
+    });
+  }
+
+  populate(): void {
+    this.locations.forEach((element: PigLocation) => {
+      const popup: string = `<b>${this.locationPipe.transform(element.key)}</b><br/>${element.data.count} Pig(s) Reported.`;
+      L.marker([element.data.longitude, element.data.latitude]).addTo(this.map).bindPopup(popup).openPopup();
+    })
+
   }
 }

@@ -1,6 +1,29 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <fieldset>
         <h1>Create New Report</h1>
+
+        <p>Choose from a location in the system or add a new location below.</p>
+        <div class="locations">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">&nbsp;</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Longitude</th>
+                  <th scope="col">Latitude</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="location" *ngFor="let location of locations">
+                  <td><input id="location_{{location.key}}" [value]='location.key' type="radio" name="location_key" formControlName="location_key"></td>
+                  <td>{{location.key | location}}</td>
+                  <td>{{location.data.longitude}}</td>
+                  <td>{{location.data.latitude}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-secondary" type="button" (click)="newLocation()">Add New Location</button>
+        </div> 
         <input class="form-control" name="name" type="text" placeholder="Name" formControlName="name"> <br>
         <input class="form-control" name="breed" type="text" placeholder="Breed" formControlName="breed"> <br>
         <input class="form-control" name="pid" type="number" placeholder="Pig ID" formControlName="pid"> <br>

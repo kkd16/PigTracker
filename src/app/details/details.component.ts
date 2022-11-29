@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { PigReport } from '../pig-report';
@@ -16,7 +16,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private pigService: PigService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,5 +31,11 @@ export class DetailsComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  delete(): void {
+    if(this.report) {
+      this.router.navigate([`/delete/${this.report.key}`]);
+    }
   }
 }

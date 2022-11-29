@@ -5,7 +5,7 @@
         <tr><td><b>Name: </b></td><td>{{report.data.name}}</td></tr>
         <tr><td><b>Breed: </b></td><td>{{report.data.breed}}</td></tr>
         <tr><td><b>Pig ID: </b></td><td>{{report.data.pid}}</td></tr>
-        <tr><td><b>Location: </b></td><td>{{report.data.location_id}}</td></tr>
+        <tr><td><b>Location: </b></td><td>{{report.data.location_key | location}}</td></tr>
         <tr><td><b>Reported By: </b></td><td>{{report.data.reporter}}</td></tr>
         <tr><td><b>Phone Number: </b></td><td>{{report.data.phone | phone}}</td></tr>
         <tr><td><b>Time Reported: </b></td><td>{{report.data.date | date:'medium'}}</td></tr>
@@ -13,5 +13,6 @@
         <tr><td><b>Extra Notes: </b></td><td>{{report.data.notes}}</td></tr>
       </tbody>
     </table>
-    <button class="btn btn-danger" type="button" (click)="goBack()">Go Back</button>
+    <button class="btn btn-primary" type="button" (click)="goBack()">Go Back</button>
+    <button class="btn btn-danger" type="button" (click)="delete()">Delete</button>
 </div>

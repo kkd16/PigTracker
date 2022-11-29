@@ -1,6 +1,9 @@
 export interface PigLocation {
-    id: number;
-    name: string;
-    longitude: number;
-    latitude: number;
+    key: string;
+    data: {
+        longitude: number;
+        latitude: number;
+        count: number
+    }
+
 }

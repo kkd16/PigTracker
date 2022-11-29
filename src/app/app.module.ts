@@ -12,6 +12,10 @@ import { DeleteComponent } from './delete/delete.component';
 import { MessagesComponent } from './messages/messages.component';
 import { PhonePipe } from './phone.pipe';
 import { StatusPipe } from './status.pipe';
+import { LocationPipe } from './location.pipe';
+import { AddLocationComponent } from './add-location/add-location.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -22,14 +26,18 @@ import { StatusPipe } from './status.pipe';
     DeleteComponent,
     MessagesComponent,
     PhonePipe,
-    StatusPipe
+    StatusPipe,
+    LocationPipe,
+    AddLocationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

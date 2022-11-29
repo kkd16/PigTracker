@@ -12,10 +12,10 @@
       </thead>
       <tbody>
         <tr class="report" *ngFor="let report of reports">
-          <td>{{report.data.location_id}}</td>
+          <td>{{report.data.location_key | location}}</td>
           <td>{{report.data.reporter}}</td>
           <td>{{report.data.date | date:'medium'}}</td>
-          <td *ngIf="report.data.picked_up === false">READY FOR PICKUP</td><td *ngIf="report.data.picked_up === true">RETRIEVED</td> 
+          <td>{{report.data.picked_up | status}}</td>
           <td><a routerLink="/detail/{{report.key}}">MORE INFO</a></td>
         </tr>
       </tbody>
