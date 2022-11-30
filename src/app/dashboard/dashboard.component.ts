@@ -7,6 +7,8 @@ import { PigLocation } from '../pig-location';
 import { PigReport } from '../pig-report';
 import { PigService } from '../pig.service';
 import { LocationPipe } from '../location.pipe';
+
+
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -35,6 +37,7 @@ export class DashboardComponent implements OnInit, AfterViewInit{
   private map: any;
   reports: PigReport[] = [];
   locations: PigLocation[] = [];
+  public sortBy: number = 0;
   
   constructor(private pigService: PigService, private locationService: LocationService, private locationPipe: LocationPipe) {}
 

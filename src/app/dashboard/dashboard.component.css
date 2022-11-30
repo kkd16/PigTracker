@@ -1,6 +1,6 @@
 .table {
-    padding: 1rem;
-    margin: 1rem;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
@@ -8,4 +8,9 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 #create-btn {
     width: 100%;
     font-size: 2rem;
+}
+
+.sortBy {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
 }

@@ -16,6 +16,7 @@ import { AddLocationComponent } from './add-location/add-location.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PickupComponent } from './pickup/pickup.component';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PickupComponent } from './pickup/pickup.component';
     StatusPipe,
     LocationPipe,
     AddLocationComponent,
-    PickupComponent
+    PickupComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,
