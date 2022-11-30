@@ -57,13 +57,16 @@ export class CreateComponent implements OnInit {
     this.form = new FormGroup(formControls, null);
   }
   ngOnInit(): void {
+    this.refreshLocations();
+  }
+
+  refreshLocations(): void {
     this.locationService.getLocations().subscribe(locations => {
       this.locations = locations;
     });
   }
 
   onSubmit(values: any) {
-    console.log("onSubmit");
     let newReport: PigReport = {
       "key": uuid.v1(),
       "data": {
@@ -79,8 +82,15 @@ export class CreateComponent implements OnInit {
       }
     };
 
-    this.pigService.addReport(newReport);
-    this.router.navigate(["/dashboard"]);
+    this.pigService.addReport(newReport).subscribe(report => {
+      console.log(report);
+      this.locationService.getLocation(report.data.location_key).subscribe(location => {
+        location.data.count++;
+        this.locationService.updateLocation(location).subscribe(()=>{
+          this.router.navigate(["/dashboard"])
+        })
+      });
+    });
   }
 
   goBack(): void {
@@ -92,7 +102,7 @@ export class CreateComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '300px';
+    dialogConfig.height = '700px';
     dialogConfig.width = '700px';
     dialogConfig.position = {
       'top': '100px',
@@ -100,6 +110,8 @@ export class CreateComponent implements OnInit {
     }
     dialogConfig.data = this.locations;
 
-    let dialogRef = this.dialog.open(AddLocationComponent, dialogConfig);
+    this.dialog.open(AddLocationComponent, dialogConfig).afterClosed().subscribe(() => {
+      this.refreshLocations();
+    });
   }
 }

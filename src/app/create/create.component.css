@@ -5,6 +5,7 @@ fieldset {
 button {
     font-size: 1rem;
     margin-right: 2rem;
+    margin-bottom: 1rem;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}

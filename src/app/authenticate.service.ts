@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
-import { MessagesService } from './messages.service';
 
 @Injectable({
   providedIn: 'root'

@@ -6,3 +6,5 @@ button {
     font-size: 1rem;
     margin-right: 2rem;
 }
+
+tr:nth-child(even) {background-color: #f2f2f2;}

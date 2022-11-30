@@ -2,11 +2,18 @@
     <h3>Add New Location</h3>
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
         <fieldset>
-            <input class="form-control" name="name" type="text" placeholder="Name" formControlName="name"> <br>
-            <div *ngIf="form.controls['name'].invalid" class="alert alert-danger">Invalid Name</div>
+            <input class="form-control" name="name" type="text" placeholder="Location Name" id="name" formControlName="name"> <br>
 
-            <input class="form-control" name="longitude" type="number" placeholder="Longitude" formControlName="longitude"> <br>
-            <input class="form-control" name="latitude" type="number" placeholder="Latitude" formControlName="latitude"> <br>
+            <div *ngIf="form.controls['name'].invalid" class="alert alert-danger">You must enter a name of 3 characters minimum. Only letters and spaces allowed.</div>
+            <div *ngIf="form.hasError('duplicateNameValidator')" class="alert alert-danger">You have entered a name which already exists.</div>
+
+            <input class="form-control" name="latitude" type="number" placeholder="Latitude" formControlName="latitude" min="-90" max="90"> <br>
+            <div *ngIf="form.controls['latitude'].invalid" class="alert alert-danger">You must enter a latitude in decimal form. -90 to 90 allowed.</div>
+            
+            <input class="form-control" name="longitude" type="number" placeholder="Longitude" formControlName="longitude" min="-180" max="180"> <br>
+            <div *ngIf="form.controls['longitude'].invalid" class="alert alert-danger">You must enter a longitude in decimal form. -180 to 180 allowed.</div>
+
+
     
             <button class="btn btn-primary" [disabled]="!form.valid">Create</button>
             <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>

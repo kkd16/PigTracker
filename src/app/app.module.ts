@@ -9,13 +9,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
 import { DeleteComponent } from './delete/delete.component';
-import { MessagesComponent } from './messages/messages.component';
 import { PhonePipe } from './phone.pipe';
 import { StatusPipe } from './status.pipe';
 import { LocationPipe } from './location.pipe';
 import { AddLocationComponent } from './add-location/add-location.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PickupComponent } from './pickup/pickup.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +24,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     CreateComponent,
     DetailsComponent,
     DeleteComponent,
-    MessagesComponent,
     PhonePipe,
     StatusPipe,
     LocationPipe,
-    AddLocationComponent
+    AddLocationComponent,
+    PickupComponent
   ],
   imports: [
     BrowserModule,

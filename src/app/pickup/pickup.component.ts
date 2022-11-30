@@ -1,29 +1,25 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PigReport } from '../pig-report';
 import { PigService } from '../pig.service';
 import { AuthenticateService } from '../authenticate.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LocationService } from '../location.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-delete',
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css']
+  selector: 'app-pickup',
+  templateUrl: './pickup.component.html',
+  styleUrls: ['./pickup.component.css']
 })
+export class PickupComponent implements OnInit {
 
-export class DeleteComponent implements OnInit {
   report: PigReport;
   form: FormGroup;
 
   submitted: boolean = false;
 
-  constructor(private dialogRef: MatDialogRef<DeleteComponent>, 
+  constructor(private dialogRef: MatDialogRef<PickupComponent>, 
     private pigService: PigService, 
-    private locationService: LocationService,
-    private router: Router,
     private authenticateService: AuthenticateService,
     @Inject(MAT_DIALOG_DATA) data: PigReport) {
       this.report = data;
@@ -35,8 +31,8 @@ export class DeleteComponent implements OnInit {
     this.form = new FormGroup(formControls);
   }
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+  }
 
   goBack(): void {
     this.dialogRef.close();
@@ -45,18 +41,15 @@ export class DeleteComponent implements OnInit {
   onSubmit(values: any) {
 
     if (this.report && this.authenticateService.authenticate(values.password)) {
-      this.locationService.getLocation(this.report.data.location_key).subscribe(location => {
-        location.data.count--;
-        this.locationService.updateLocation(location).subscribe(()=>{
-          this.pigService.deleteReport(this.report.key).subscribe(report => {
-            this.report = report;
-            this.dialogRef.close();
-            this.router.navigate(['/dashboard']);
-          });
-        })
+      this.report.data.picked_up = this.report.data.picked_up ? false : true;
+      this.pigService.updateReport(this.report).subscribe(() => {
+        console.log("Changed Status " + this.report.data.name);
+        this.dialogRef.close();
       })
     } else {
       this.submitted = true;
     }
   }
+  
+
 }

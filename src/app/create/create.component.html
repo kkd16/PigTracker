@@ -24,12 +24,24 @@
             </table>
             <button class="btn btn-secondary" type="button" (click)="newLocation()">Add New Location</button>
         </div> 
+        <div *ngIf="form.controls['location_key'].invalid" class="alert alert-danger">You must select a location.</div>
+
         <input class="form-control" name="name" type="text" placeholder="Name" formControlName="name"> <br>
+        <div *ngIf="form.controls['name'].invalid" class="alert alert-danger">You must enter a name of minimum 3 characters.</div>
+
         <input class="form-control" name="breed" type="text" placeholder="Breed" formControlName="breed"> <br>
+        <div *ngIf="form.controls['breed'].invalid" class="alert alert-danger">You must enter a breed of minimum 3 characters.</div>
+
         <input class="form-control" name="pid" type="number" placeholder="Pig ID" formControlName="pid"> <br>
+        <div *ngIf="form.controls['pid'].invalid" class="alert alert-danger">You must enter an ID number.</div>
+
         <input class="form-control" name="reporter" type="text" placeholder="Your Name" formControlName="reporter"> <br>
-        <input class="form-control" name="phone" type="text" placeholder="##########" formControlName="phone"> <br>
-        <input class="form-control" name="notes" type="text" placeholder="Extra Notes" formControlName="notes"> <br>
+        <div *ngIf="form.controls['reporter'].invalid" class="alert alert-danger">You must enter a name of minimum 3 characters.</div>
+
+        <input class="form-control" name="phone" type="text" placeholder="Phone Number" formControlName="phone"> <br>
+        <div *ngIf="form.controls['phone'].invalid" class="alert alert-danger">You must enter a phone number in the form ##########.</div>
+
+        <input class="form-control" name="notes" type="text" placeholder="Extra Notes (Optional)" formControlName="notes"> <br>
         <button class="btn btn-primary" [disabled]="!form.valid">Create</button>
         <button class="btn btn-danger" type="button" (click)="goBack()">Cancel</button>
     </fieldset>

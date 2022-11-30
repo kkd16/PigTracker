@@ -4,6 +4,9 @@ import { Location } from '@angular/common';
 
 import { PigReport } from '../pig-report';
 import { PigService } from '../pig.service';
+import { DeleteComponent } from '../delete/delete.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PickupComponent } from '../pickup/pickup.component';
 
 @Component({
   selector: 'app-details',
@@ -12,12 +15,12 @@ import { PigService } from '../pig.service';
 })
 export class DetailsComponent implements OnInit {
   report: PigReport | undefined;
-
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private pigService: PigService,
     private location: Location,
-    private router: Router
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -29,13 +32,42 @@ export class DetailsComponent implements OnInit {
     this.pigService.getReport(key).subscribe(report => this.report = report);
   }
 
+
   goBack(): void {
     this.location.back();
   }
 
   delete(): void {
-    if(this.report) {
-      this.router.navigate([`/delete/${this.report.key}`]);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '300px';
+    dialogConfig.width = '700px';
+    dialogConfig.position = {
+      'top': '150px',
+      left: '250px'
     }
+    dialogConfig.data = this.report;
+
+    this.dialog.open(DeleteComponent, dialogConfig);
   }
+
+  pickedUp():void {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '300px';
+    dialogConfig.width = '700px';
+    dialogConfig.position = {
+      'top': '150px',
+      left: '250px'
+    }
+    dialogConfig.data = this.report;
+
+    this.dialog.open(PickupComponent, dialogConfig).afterClosed().subscribe( () => {
+      this.getReport();
+    });
+  }
+
 }

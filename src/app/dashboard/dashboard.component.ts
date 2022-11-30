@@ -70,8 +70,10 @@ export class DashboardComponent implements OnInit, AfterViewInit{
 
   populate(): void {
     this.locations.forEach((element: PigLocation) => {
-      const popup: string = `<b>${this.locationPipe.transform(element.key)}</b><br/>${element.data.count} Pig(s) Reported.`;
-      L.marker([element.data.longitude, element.data.latitude]).addTo(this.map).bindPopup(popup).openPopup();
+      if (element.data.count >= 1) {
+        const popup: string = `<b>${this.locationPipe.transform(element.key)}</b><br/>${element.data.count} Pig(s) Reported.`;
+        L.marker([element.data.latitude, element.data.longitude]).addTo(this.map).bindPopup(popup).openPopup();
+      }
     })
 
   }
