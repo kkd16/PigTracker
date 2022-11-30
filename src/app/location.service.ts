@@ -8,7 +8,7 @@ import { PigLocation } from './pig-location';
 })
 export class LocationService {
 
-  private locationsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/location6/documents/';
+  private locationsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/locations/documents/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

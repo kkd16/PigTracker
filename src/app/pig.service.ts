@@ -8,7 +8,7 @@ import { PigReport } from './pig-report';
 })
 export class PigService {
 
-  private reportsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/test6/documents/';
+  private reportsUrl = 'https://272.selfip.net/apps/wcUnhqEgpi/collections/reports/documents/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
