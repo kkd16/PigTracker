@@ -18,6 +18,7 @@ export class DeleteComponent implements OnInit {
   report: PigReport;
   form: FormGroup;
 
+  correct_password: string = "84892b91ef3bf9d216bbc6e88d74a77c"
   submitted: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<DeleteComponent>, 
@@ -44,19 +45,21 @@ export class DeleteComponent implements OnInit {
 
   onSubmit(values: any) {
 
-    if (this.report && this.authenticateService.authenticate(values.password)) {
-      this.locationService.getLocation(this.report.data.location_key).subscribe(location => {
-        location.data.count--;
-        this.locationService.updateLocation(location).subscribe(()=>{
-          this.pigService.deleteReport(this.report.key).subscribe(report => {
-            this.report = report;
-            this.dialogRef.close();
-            this.router.navigate(['/dashboard']);
-          });
+    this.authenticateService.authenticate(values.password).subscribe(ret => {
+      if(ret.Digest === this.correct_password) {
+        this.locationService.getLocation(this.report.data.location_key).subscribe(location => {
+          location.data.count--;
+          this.locationService.updateLocation(location).subscribe(()=>{
+            this.pigService.deleteReport(this.report.key).subscribe(report => {
+              this.report = report;
+              this.dialogRef.close();
+              this.router.navigate(['/dashboard']);
+            });
+          })
         })
-      })
-    } else {
-      this.submitted = true;
-    }
+      } else {
+        this.submitted = true;
+      }
+    });
   }
 }

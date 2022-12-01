@@ -13,6 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class PickupComponent implements OnInit {
 
+  correct_password: string = "84892b91ef3bf9d216bbc6e88d74a77c"
   report: PigReport;
   form: FormGroup;
 
@@ -40,16 +41,17 @@ export class PickupComponent implements OnInit {
 
   onSubmit(values: any) {
 
-    if (this.report && this.authenticateService.authenticate(values.password)) {
-      this.report.data.picked_up = this.report.data.picked_up ? false : true;
-      this.pigService.updateReport(this.report).subscribe(() => {
-        console.log("Changed Status " + this.report.data.name);
-        this.dialogRef.close();
-      })
-    } else {
-      this.submitted = true;
-    }
-  }
+    this.authenticateService.authenticate(values.password).subscribe(ret => {
+      if (ret.Digest === this.correct_password) {
+        this.report.data.picked_up = this.report.data.picked_up ? false : true;
+        this.pigService.updateReport(this.report).subscribe(() => {
+          console.log("Changed Status " + this.report.data.name);
+          this.dialogRef.close();
+        });
   
-
+      } else {
+        this.submitted = true;
+      }
+    });
+  }
 }
