@@ -2,6 +2,8 @@
 
 Final Project for CMPT 272 - Web I at SFU - Fall 2022.
 
+MapBox token has been taken down to prevent misuse, you can add one to the dashboard.component.ts file.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
 ## Development server
